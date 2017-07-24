@@ -1,31 +1,31 @@
 package uaparser
 
 import "testing"
-import "fmt"
 
 func TestParse(t *testing.T) {
-	var expectedBrowserNames map[string][]string = GetBrowserNames()
-	var expectedOperatingSystems map[string][]string = GetOSNames()
-	var expectedDeviceTypes map[string][]string = GetDeviceTypes()
-	var totalTestCount = 0
+	var (
+		expectedBrowserNames     map[string][]string = GetBrowserNames()
+		expectedOperatingSystems map[string][]string = GetOSNames()
+		expectedDeviceTypes      map[string][]string = GetDeviceTypes()
+		totalTestCount                               = 0
+	)
 
 	totalTestCount += _checkExepectations(t, expectedOperatingSystems, "os")
 	totalTestCount += _checkExepectations(t, expectedBrowserNames, "browser")
 	totalTestCount += _checkExepectations(t, expectedDeviceTypes, "deviceType")
-
-	fmt.Printf("Ran %d tests\n", totalTestCount)
 }
 
 func _checkExepectations(t *testing.T, expectations map[string][]string, testType string) (testCount int) {
-	var uaParseResult *UAInfo
-	var testResult bool
-	var comparedTo string
+	var (
+		uaParseResult *UAInfo
+		testResult    bool
+		comparedTo    string
+	)
 
 	testCount = 0
 
 	for expectation := range expectations {
 		for key := range expectations[expectation] {
-			fmt.Printf("Testing: %s \n", expectations[expectation][key])
 			uaParseResult = Parse(expectations[expectation][key])
 
 			if testType == "browser" {
