@@ -23,6 +23,7 @@ var (
 		mustNotContains: []string{"Windows Phone"},
 		versionSplitters: [][]string{
 			[]string{"Windows ", ";"},
+			[]string{"Windows ", ")"},
 		},
 	}
 
